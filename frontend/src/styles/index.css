@@ -1,0 +1,418 @@
+:root {
+  --color-bg: #FDF6ED;
+  --color-surface: #ffffff;
+  --color-text: #1f2937;
+  --color-accent: #E8734E;
+  --color-accent-hover: #c95d3c;
+  --color-muted: #6b7280;
+  --max-width: 960px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 2rem;
+  border-bottom: 1px solid #efe4d4;
+  background: var(--color-surface);
+}
+
+.brand a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand-logo {
+  height: 56px;
+  width: auto;
+  display: block;
+}
+
+.primary-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.primary-nav a.active {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.auth-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: 1rem;
+  font-size: 0.85rem;
+}
+
+.auth-user {
+  color: var(--color-muted);
+}
+
+.auth-btn {
+  padding: 0.4rem 0.85rem;
+  border-radius: 4px;
+  border: 1.5px solid var(--color-accent);
+  background: transparent;
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.auth-btn:hover {
+  background: var(--color-accent);
+  color: white;
+  text-decoration: none;
+}
+
+.site-main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.site-footer {
+  padding: 1.5rem 2rem;
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--color-accent);
+  color: white;
+  border-radius: 4px;
+}
+
+.cta:hover {
+  text-decoration: none;
+  background: var(--color-accent-hover);
+}
+
+.tour-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.tour-card {
+  padding: 1rem 1.25rem;
+  background: var(--color-surface);
+  border: 1px solid #efe4d4;
+  border-radius: 6px;
+}
+
+.tour-card h2 {
+  margin-top: 0;
+}
+
+.tour-meta {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1.5rem;
+}
+
+.contact-info dt {
+  font-weight: 600;
+}
+
+.contact-info dd {
+  margin: 0;
+}
+
+.error {
+  color: #b91c1c;
+}
+
+/* Booking flow shared */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.field input,
+.field textarea,
+.field select {
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #d6c8b3;
+  border-radius: 4px;
+  font: inherit;
+  background: white;
+}
+
+.field-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn {
+  padding: 0.55rem 1.1rem;
+  border-radius: 4px;
+  border: 1.5px solid var(--color-accent);
+  background: var(--color-accent);
+  color: white;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--color-accent-hover);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-accent);
+}
+
+.btn-secondary:hover {
+  background: var(--color-accent);
+  color: white;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.muted {
+  color: var(--color-muted);
+}
+.push-right {
+  margin-left: auto;
+}
+
+.tour-card.unavailable {
+  opacity: 0.55;
+}
+
+.tour-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.schedule-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.schedule-controls label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.schedule-controls input {
+  width: 4rem;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid #d6c8b3;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.slot-day {
+  margin-bottom: 0.5rem;
+  background: var(--color-surface);
+  border: 1px solid #efe4d4;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.slot-day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: #faf2e3;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  font-weight: 600;
+}
+
+.slot-day-list {
+  padding: 0.5rem 1rem 1rem;
+  display: grid;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+}
+
+.slot-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #efe4d4;
+  border-radius: 4px;
+  background: #fffbf3;
+}
+
+.slot-row .slot-time {
+  font-weight: 600;
+}
+
+.slot-row .slot-availability {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+
+.tour-detail-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 720px) {
+  .tour-detail-panels {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tour-photos {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.tour-photos img {
+  width: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+  max-height: 320px;
+}
+
+.date-jumper {
+  margin-bottom: 1rem;
+}
+
+.tz-note {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+.booking-form {
+  background: var(--color-surface);
+  border: 1px solid #efe4d4;
+  border-radius: 6px;
+  padding: 1.25rem;
+}
+
+.participant-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 0.5rem;
+  align-items: end;
+  margin-bottom: 0.5rem;
+}
+
+.participant-row .btn-remove {
+  background: transparent;
+  border: none;
+  color: #b91c1c;
+  cursor: pointer;
+  padding: 0.5rem;
+  font: inherit;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.confirmation-card,
+.lookup-card {
+  background: var(--color-surface);
+  border: 1px solid #efe4d4;
+  border-radius: 6px;
+  padding: 1.5rem;
+  max-width: 560px;
+  margin: 1rem auto;
+}
+
+.confirmation-status {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.status-paid {
+  color: #15803d;
+}
+
+.status-pending {
+  color: #b45309;
+}
+
+.status-cancelled {
+  color: #b91c1c;
+}
+
+.countdown {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}

@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.env
+.env.local
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+node_modules/
+dist/
+.vite/
+
+# User-uploaded media (recreated on app startup; backed up out-of-band)
+uploads/
+
+.idea/
+.vscode/
+.DS_Store

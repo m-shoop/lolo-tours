@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" role="img" aria-labelledby="title desc">
+  <title id="title">Lolo Tours</title>
+  <desc id="desc">Playful logo for Lolo Tours. The wordmark "lolo" tilts gently upward from bottom-left to right, and "tours" emerges horizontally to the right underneath it.</desc>
+
+  <g transform="rotate(-5 87 250)" fill="#E8734E">
+    <rect x="115" y="50" width="48" height="200" rx="24"/>
+    <circle cx="256" cy="166" r="60" fill="none" stroke="#E8734E" stroke-width="40"/>
+    <rect x="350" y="46" width="48" height="200" rx="24"/>
+    <circle cx="495" cy="162" r="60" fill="none" stroke="#E8734E" stroke-width="40"/>
+  </g>
+
+  <text x="400" y="255" text-anchor="start"
+        font-family="'Anthropic Sans', -apple-system, system-ui, 'Helvetica Neue', Arial, sans-serif"
+        font-size="34" font-weight="500" letter-spacing="3" fill="#E8734E">tours</text>
+</svg>

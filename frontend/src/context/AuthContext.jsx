@@ -1,0 +1,117 @@
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+const AuthContext = createContext(null);
+
+const TOKEN_KEY = "lolo_token";
+const USER_KEY = "lolo_user";
+const PERMISSIONS_KEY = "lolo_permissions";
+
+function getTokenExpiry(token) {
+  try {
+    const payload = JSON.parse(
+      atob(token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))
+    );
+    return payload.exp ? payload.exp * 1000 : null;
+  } catch {
+    return null;
+  }
+}
+
+function checkExpired(token) {
+  if (!token) return false;
+  const expiry = getTokenExpiry(token);
+  return expiry !== null && Date.now() >= expiry;
+}
+
+function loadPermissions() {
+  try {
+    return JSON.parse(localStorage.getItem(PERMISSIONS_KEY) ?? "[]");
+  } catch {
+    return [];
+  }
+}
+
+export function AuthProvider({ children }) {
+  const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY));
+  const [username, setUsername] = useState(() =>
+    localStorage.getItem(USER_KEY)
+  );
+  const [permissions, setPermissions] = useState(loadPermissions);
+  const [isTokenExpired, setIsTokenExpired] = useState(() =>
+    checkExpired(localStorage.getItem(TOKEN_KEY))
+  );
+  const expiryTimer = useRef(null);
+
+  useEffect(() => {
+    clearTimeout(expiryTimer.current);
+    if (!token) {
+      setIsTokenExpired(false);
+      return;
+    }
+    const expiry = getTokenExpiry(token);
+    if (expiry === null) return;
+    const msUntilExpiry = expiry - Date.now();
+    if (msUntilExpiry <= 0) {
+      setIsTokenExpired(true);
+      return;
+    }
+    setIsTokenExpired(false);
+    expiryTimer.current = setTimeout(
+      () => setIsTokenExpired(true),
+      msUntilExpiry
+    );
+    return () => clearTimeout(expiryTimer.current);
+  }, [token]);
+
+  const can = useCallback(
+    (permission) => permissions.includes(permission),
+    [permissions]
+  );
+
+  function login(accessToken, user, userPermissions) {
+    localStorage.setItem(TOKEN_KEY, accessToken);
+    localStorage.setItem(USER_KEY, user);
+    localStorage.setItem(PERMISSIONS_KEY, JSON.stringify(userPermissions));
+    setToken(accessToken);
+    setUsername(user);
+    setPermissions(userPermissions);
+  }
+
+  function logout() {
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
+    localStorage.removeItem(PERMISSIONS_KEY);
+    sessionStorage.clear();
+    setToken(null);
+    setUsername(null);
+    setPermissions([]);
+  }
+
+  return (
+    <AuthContext.Provider
+      value={{
+        token,
+        username,
+        permissions,
+        isLoggedIn: !!token,
+        isTokenExpired,
+        can,
+        login,
+        logout,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
